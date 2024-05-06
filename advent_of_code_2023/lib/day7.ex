@@ -23,7 +23,7 @@ defmodule Day7 do
   defp compare_hand({head1, _tail1}, {head2, _tail2}) when head1 != head2, do: head2 > head1
 
   def better_hand?(hand1,hand2) do
-    power_first_hand = power_of_hand(hand1)
+    power_first_hand  = power_of_hand(hand1)
     power_second_hand = power_of_hand(hand2)
     cond do
       power_first_hand > power_second_hand -> false
