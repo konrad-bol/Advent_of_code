@@ -11,16 +11,16 @@ defmodule Day7 do
     |> Enum.sum()
   end
 
-  def compare_type([hand1,_],[hand2,_]) do
+  defp compare_type([hand1,_],[hand2,_]) do
     case better_hand?(hand1,hand2) do
       0      -> comparer_hand(String.codepoints(hand1),String.codepoints(hand2))
       result -> result
     end
   end
-  def comparer_hand([head1| tail1], [head2| tail2]), do:  compare_hand({@value_card[head1], tail1},{@value_card[head2],tail2})
+  defp comparer_hand([head1| tail1], [head2| tail2]), do:  compare_hand({@value_card[head1], tail1},{@value_card[head2],tail2})
 
-  def compare_hand({head1, tail1}, {head2, tail2})   when head1 == head2, do: comparer_hand(tail1,tail2)
-  def compare_hand({head1, _tail1}, {head2, _tail2}) when head1 != head2, do: head2 > head1
+  defp compare_hand({head1, tail1}, {head2, tail2})   when head1 == head2, do: comparer_hand(tail1,tail2)
+  defp compare_hand({head1, _tail1}, {head2, _tail2}) when head1 != head2, do: head2 > head1
 
   def better_hand?(hand1,hand2) do
     power_first_hand = power_of_hand(hand1)
@@ -40,18 +40,18 @@ defmodule Day7 do
     |> type_of_hand()
   end
 
-  def type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==1, do: 7
-  def type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==4, do: 2
-  def type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==5, do: 1
-  def type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==3, do: 4
-  def type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==4, do: 3
-  def type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==6, do: 5
-  def type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==4, do: 6
+  defp type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==1, do: 7
+  defp type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==4, do: 2
+  defp type_of_hand({number_of_uniq_card,_help_number}) when number_of_uniq_card==5, do: 1
+  defp type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==3, do: 4
+  defp type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==4, do: 3
+  defp type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==6, do: 5
+  defp type_of_hand({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==4, do: 6
 
 
 
 
-  ###################Part 2##################################################################
+  ###p ###############Part 2##################################################################
   def calc2(input) do
     input
     |> String.split(["\n"," "],trim: true)
@@ -61,16 +61,16 @@ defmodule Day7 do
     |> Enum.sum()
   end
 
-  def sorter_type([hand1,_],[hand2,_]) do
+  defp  sorter_type([hand1,_],[hand2,_]) do
     case better_hand2?(hand1,hand2) do
       0       -> comparer_hand2(String.codepoints(hand1),String.codepoints(hand2))
       result  -> result
     end
   end
-  def comparer_hand2([head1| tail1], [head2| tail2]), do:  compare_hand2({@value_card_part2[head1], tail1},{@value_card_part2[head2],tail2})
+  defp comparer_hand2([head1| tail1], [head2| tail2]), do:  compare_hand2({@value_card_part2[head1], tail1},{@value_card_part2[head2],tail2})
 
-  def compare_hand2({head1, tail1}, {head2, tail2})   when head1 == head2, do: comparer_hand2(tail1,tail2)
-  def compare_hand2({head1, _tail1}, {head2, _tail2}) when head1 != head2, do: head2>head1
+  defp compare_hand2({head1, tail1}, {head2, tail2})   when head1 == head2, do: comparer_hand2(tail1,tail2)
+  defp compare_hand2({head1, _tail1}, {head2, _tail2}) when head1 != head2, do: head2>head1
 
   def better_hand2?(hand1,hand2) do
     power_first_hand  = power_of_hand2(hand1)
@@ -111,21 +111,21 @@ defmodule Day7 do
     |> Enum.reduce([-1,1], &([List.first(&2)+1, List.last(&2)*elem(&1,1)]))
   end
 
-  def type_of_hand2_J([num_J,num_uniq,helper_num])      when num_uniq==2 and num_J==1 and helper_num==4 , do: 5
-  def type_of_hand2_J([num_J,_num_uniq,_helper_num])    when num_J==5, do: 7
-  def type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==1, do: 7
-  def type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==2, do: 6
-  def type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==3, do: 4
-  def type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==4, do: 2
+  defp type_of_hand2_J([num_J,num_uniq,helper_num])      when num_uniq==2 and num_J==1 and helper_num==4 , do: 5
+  defp type_of_hand2_J([num_J,_num_uniq,_helper_num])    when num_J==5, do: 7
+  defp type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==1, do: 7
+  defp type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==2, do: 6
+  defp type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==3, do: 4
+  defp type_of_hand2_J([_num_J,num_uniq,_helper_num])    when num_uniq==4, do: 2
 
 
-  def type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==1, do: 7
-  def type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==4, do: 2
-  def type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==5, do: 1
-  def type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==3, do: 4
-  def type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==4, do: 3
-  def type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==6, do: 5
-  def type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==4, do: 6
+  defp type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==1, do: 7
+  defp type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==4, do: 2
+  defp type_of_hand2({number_of_uniq_card,_help_number}) when number_of_uniq_card==5, do: 1
+  defp type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==3, do: 4
+  defp type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==3 and help_number==4, do: 3
+  defp type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==6, do: 5
+  defp type_of_hand2({number_of_uniq_card,help_number})  when number_of_uniq_card==2 and help_number==4, do: 6
 
 
 end
