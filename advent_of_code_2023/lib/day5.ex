@@ -27,7 +27,7 @@ defmodule Day5 do
   def convert_seed2(num,maps) do
     maps
     |>Enum.reduce(num, fn level, acc ->
-       Enum.reduce_while(level,acc, fn [x,y,z], ans ->
+       Enum.reduce_while(level,acc, fn [x,y,z], _ans ->
 
         if(acc in y..(y+z-1)) do
           {:halt,acc+x-y}
@@ -46,7 +46,7 @@ defmodule Day5 do
     |>Stream.map(&convert_map(&1))
     |>Enum.to_list()
     |>IO.inspect()
-     seed=input
+     _seed=input
     |>hd()|>hd()
     |>String.split(" ",trim: true)
     |>Enum.map(&String.to_integer&1)
